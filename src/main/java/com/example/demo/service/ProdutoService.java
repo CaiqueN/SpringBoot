@@ -25,7 +25,6 @@ public class ProdutoService {
         return produto;
     }
 
-    //abaixo erro no getId e no return produto
     public Produto atualizar(Produto produto) {
         if (produto.getId() != null && banco.containsKey(produto.getId())) {
             banco.put(produto.getId(), produto);
