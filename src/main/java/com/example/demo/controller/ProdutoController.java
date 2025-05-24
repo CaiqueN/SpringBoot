@@ -2,10 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Produto;
 import com.example.demo.service.ProdutoService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -18,6 +18,20 @@ public class ProdutoController {
     public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
     }
+
+    @PostMapping("/criar")
+    public ResponseEntity<Produto> salvar(@RequestBody @Valid Produto produto) {
+        log.info("Criando produto: {}", produto);
+        Produto produtoSalvo = produtoService.salvar(produto);
+        if (produtoSalvo != null) {
+            log.info("Produto criado com sucesso: {}", produtoSalvo);
+            return ResponseEntity.ok(produtoSalvo);
+        } else {
+            log.warn("Erro ao criar o produto: {}", produto);
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @GetMapping
     public List<Produto> listarTodos() {
@@ -39,7 +53,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody @Valid Produto produto) {
         log.info("Atualizando produto com ID: {}", id);
         produto.setId(id);
         Produto atualizado = produtoService.atualizar(produto);
