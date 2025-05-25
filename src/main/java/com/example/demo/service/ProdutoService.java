@@ -36,7 +36,7 @@ public class ProdutoService {
         return banco.remove(id) != null;
     }
 
-    public Produto buscarPorId(Long id) {
+    public Produto buscar(Long id) {
         return banco.get(id);
     }
 }

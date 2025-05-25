@@ -66,7 +66,7 @@ class ProdutoControllerTest {
         produtoBuscado.setNome("Produto encontrado");
         produtoBuscado.setPreco(3000.0);
 
-        when(produtoService.buscarPorId(1L)).thenReturn(produtoBuscado);
+        when(produtoService.buscar(1L)).thenReturn(produtoBuscado);
 
         mockMvc.perform(get("/produtos/1")
                         .contentType(MediaType.APPLICATION_JSON))

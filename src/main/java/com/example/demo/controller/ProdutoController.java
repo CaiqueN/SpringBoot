@@ -44,9 +44,9 @@ public class ProdutoController {
 
     @Trace(dispatcher = true)
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Produto> buscar(@PathVariable Long id) {
         log.info("Buscando produto com ID: {}", id);
-        Produto produto = produtoService.buscarPorId(id);
+        Produto produto = produtoService.buscar(id);
         if (produto != null) {
             log.info("Produto encontrado: {}", produto);
             return ResponseEntity.ok(produto);
